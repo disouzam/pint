@@ -43,6 +43,7 @@ test-mpl = ["pytest-mpl"]
 test-all = ["pint[test, test-mpl]"]
 codspeed = ["pint[test-all]", "pytest-codspeed"]
 numpy = ["numpy >= 2.0.0"]
+optype = ["optype[numpy]"]
 uncertainties = ["uncertainties >= 3.1.6"]
 babel = ["babel <= 2.8"]
 pandas = ["pint-pandas >= 0.3"]
@@ -52,7 +53,7 @@ dask = ["dask < 2025.3.0"]
 scipy = ["scipy"]
 matplotlib = ["matplotlib"]
 all = [
-  "pint[numpy,uncertainties,babel,pandas,pandas,xarray,dask,scipy,matplotlib]",
+  "pint[numpy,optype,uncertainties,babel,pandas,pandas,xarray,dask,scipy,matplotlib]",
 ]
 docs = [
   "sphinx>=6,<8.2",
@@ -79,6 +80,7 @@ docs = [
   "numpy",
   "xarray",
   "dask[complete]<2025.3.0",
+  "optype[numpy]",
 ]
 
 [project.urls]
@@ -128,7 +130,11 @@ lint = { features = ["lint"], no-default-feature = true }
 build = { features = ["build"], no-default-feature = true }
 test = { features = ["test"], solve-group = "default" }
 test-all = { features = ["test-all"], solve-group = "default" }
-typecheck = { features = ["typecheck", "test-all"], solve-group = "default" }
+typecheck = { features = [
+  "typecheck",
+  "optype",
+  "test-all",
+], solve-group = "default" }
 numpy = { features = ["numpy"], solve-group = "default" }
 codspeed = { features = ["codspeed"], solve-group = "default" }
 docs = { features = [
